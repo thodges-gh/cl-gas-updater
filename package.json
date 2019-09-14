@@ -1,0 +1,18 @@
+{
+  "name": "cl-gas-updater",
+  "version": "0.0.1",
+  "description": "A service which updates the gas price for Chainlink responses",
+  "keywords": [
+    "chainlink",
+    "ethereum"
+  ],
+  "author": "Thomas Hodges",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "node-cron": "^2.0.3",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}
