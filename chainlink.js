@@ -1,39 +1,27 @@
 const rp = require('request-promise')
 
-const authenticate = (callback) => {
-  let cookieJar = rp.jar()
-  rp({
-    uri: process.env.CL_URL,
-    jar: cookieJar,
-    path: '/sessions',
+const authenticate = async () => {
+  const cookie = rp.jar()
+  await rp({
+    uri: process.env.CL_URL + '/sessions',
+    jar: cookie,
     method: 'POST',
     json: {
       'email': process.env.CL_EMAIL,
       'password': process.env.CL_PASSWORD
     }
-  }).then(cookie => {
-    cookieJar.setCookie(cookie)
-    callback(cookieJar)
-  }).catch(error => {
-    console.log(error)
-    callback(error)
   })
+  return cookie
 }
 
-const updateChainlinkGasPrice = (cookie, newGasPrice, callback) => {
-  rp({
-    uri: process.env.CL_URL,
-    path: '/v2/config',
+const updateChainlinkGasPrice = async (cookie, newGasPrice) => {
+  return await rp({
+    uri: process.env.CL_URL + '/v2/config',
     method: 'PATCH',
     jar: cookie,
     json: {
       'ethGasPriceDefault': newGasPrice
     }
-  }).then(response => {
-    callback(response)
-  }).catch(error => {
-    console.log(error)
-    callback(error)
   })
 }
 

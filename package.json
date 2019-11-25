@@ -1,6 +1,6 @@
 {
   "name": "cl-gas-updater",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A service which updates the gas price for Chainlink responses",
   "keywords": [
     "chainlink",

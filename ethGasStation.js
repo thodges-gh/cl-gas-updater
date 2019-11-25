@@ -4,16 +4,12 @@ const convertToWei = (input) => {
   return Math.floor(input * 100000000)
 }
 
-const getEthGasStationInfoPrice = (callback) => {
-  rp({
+const getEthGasStationInfoPrice = async () => {
+  const response = await rp({
     uri: 'https://ethgasstation.info/json/ethgasAPI.json',
     json: true
-  }).then(response => {
-    callback(convertToWei(response.fast))
-  }).catch(error => {
-    console.log(error)
-    callback(error)
   })
+  return convertToWei(response.fast)
 }
 
 exports.getEthGasStationInfoPrice = getEthGasStationInfoPrice

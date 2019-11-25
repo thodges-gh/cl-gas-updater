@@ -11,17 +11,14 @@ const port = process.env.EA_PORT || 8080
 app.use(bodyParser.json())
 
 app.get('/health', (req, res) => {
-	res.status(200).send('ok')
+  res.status(200).send('ok')
 })
 
-cron.schedule('* * * * *', () => {
-  authenticate(cookie => {
-    getEthGasStationInfoPrice(gasPrice => {
-      updateChainlinkGasPrice(cookie, gasPrice, result => {
-        console.log("Gas price updated:", gasPrice)
-      })
-    })
-  })
+cron.schedule('0 * * * * *', async () => {
+  const cookie = await authenticate()
+  const gasPrice = await getEthGasStationInfoPrice()
+  const result = await updateChainlinkGasPrice(cookie, gasPrice)
+  console.log('Gas price updated:', gasPrice)
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}!`))
