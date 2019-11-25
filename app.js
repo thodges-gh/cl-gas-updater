@@ -6,7 +6,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cron = require('node-cron')
 const app = express()
-const port = process.env.EA_PORT || 8080
+const port = process.env.PORT || 8080
 
 app.use(bodyParser.json())
 
@@ -22,3 +22,7 @@ cron.schedule('0 * * * * *', async () => {
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}!`))
+
+process.on('SIGINT', () => {
+  process.exit()
+})

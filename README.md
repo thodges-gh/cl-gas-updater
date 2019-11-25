@@ -2,7 +2,7 @@
 
 This is a very simple service to update the Chainlink node's response gas price. It checks the current "Fast" gas price as reported by [ETH Gas Station](https://ethgasstation.info/), authenticates with your Chainlink node, and updates the config value for `ETH_GAS_PRICE_DEFAULT`.
 
-## Required Environment Variables
+## Environment Variables
 
 - `CL_URL`: The URL that your Chainlink node is listening on.
 - `CL_EMAIL`: The API email address you use to log into the Chainlink node's GUI.
@@ -13,13 +13,13 @@ This is a very simple service to update the Chainlink node's response gas price.
 If running the Chainlink node on its own Docker container on the same machine, `CL_URL` will likely need to be updated to that machine's IP, or the Docker interface gateway IP (usually 172.17.0.1).
 
 ```
-docker run -it -e CL_URL=http://172.17.0.1:6688 -e CL_EMAIL=user@example.com -e CL_PASSWORD=my_password -p 8080:8080 thodges/cl-gas-updater
+docker run -it -e CL_URL=http://172.17.0.1:6688 -e CL_EMAIL=user@example.com -e CL_PASSWORD=my_password thodges/cl-gas-updater
 ```
 
 However, if you have named your Chainlink container by adding `--name chainlink` to its run command, then you can link to it while running the cl-gas-updater container by also adding `--link chainlink` to your run command.
 
 ```
-docker run --link chainlink -it -e CL_URL=http://chainlink:6688 -e CL_EMAIL=user@example.com -e CL_PASSWORD=my_password -p 8080:8080 thodges/cl-gas-updater
+docker run --link chainlink -it -e CL_URL=http://chainlink:6688 -e CL_EMAIL=user@example.com -e CL_PASSWORD=my_password thodges/cl-gas-updater
 ```
 
 Alternatively you can build the container yourself and run that:
@@ -27,8 +27,6 @@ Alternatively you can build the container yourself and run that:
 ```
 docker build . -t cl-gas-updater
 ```
-
-
 
 ## Running locally (for testing and development)
 
