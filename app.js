@@ -1,4 +1,4 @@
-const getEthGasStationInfoPrice = require('./ethGasStation').getEthGasStationInfoPrice
+const createRequests = require('./requests').createRequests
 const updateChainlinkGasPrice = require('./chainlink').updateChainlinkGasPrice
 const authenticate = require('./chainlink').authenticate
 
@@ -16,7 +16,7 @@ app.get('/health', (req, res) => {
 
 cron.schedule('0 * * * * *', async () => {
   const cookie = await authenticate()
-  const gasPrice = await getEthGasStationInfoPrice()
+  const gasPrice = await createRequests()
   const result = await updateChainlinkGasPrice(cookie, gasPrice)
   console.log('Gas price updated:', gasPrice)
 })

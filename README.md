@@ -1,6 +1,10 @@
 # Chainlink Gas Price Update Service
 
-This is a very simple service to update the Chainlink node's response gas price. It checks the current "Fast" gas price as reported by [ETH Gas Station](https://ethgasstation.info/), authenticates with your Chainlink node, and updates the config value for `ETH_GAS_PRICE_DEFAULT`.
+This service will get the gas price for multiple gas reporting sites and update your Chainlink node with the max "fast" value of the endpoints every minute.
+
+Currently supported endpoints are:
+- [ETH Gas Station](https://ethgasstation.info/json/ethgasAPI.json)
+- [Anyblock Analytics](https://api.anyblock.tools/latest-minimum-gasprice)
 
 ## Environment Variables
 
