@@ -5,6 +5,7 @@ This service will get the gas price for multiple gas reporting sites and update 
 Currently supported endpoints are:
 - [ETH Gas Station](https://ethgasstation.info/json/ethgasAPI.json)
 - [Anyblock Analytics](https://api.anyblock.tools/latest-minimum-gasprice)
+- [POA Network](https://gasprice.poa.network)
 
 ## Environment Variables
 
