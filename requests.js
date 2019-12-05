@@ -1,6 +1,6 @@
 const genericRequest = require('./requester').getPrice
 
-const fallbackGasPrice = process.env.FALLBACK_GAS_PRICE || 20000000000
+const fallbackGasPrice = process.env.FALLBACK_GAS_PRICE || 25000000000
 
 const createRequests = async () => {
   const promises = [
