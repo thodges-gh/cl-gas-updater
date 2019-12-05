@@ -12,6 +12,7 @@ Currently supported endpoints are:
 - `CL_URL`: The URL that your Chainlink node is listening on.
 - `CL_EMAIL`: The API email address you use to log into the Chainlink node's GUI.
 - `CL_PASSWORD`: The API password you use to log into the Chainlink node's GUI.
+- `FALLBACK_GAS_PRICE`: The gas price (measured in wei) to be used if all data sources are down. Will default to 20 Gwei if not set (and all data sources are down).
 
 ## Running with Docker
 
