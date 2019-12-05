@@ -1,5 +1,7 @@
 const genericRequest = require('./requester').getPrice
 
+const fallbackGasPrice = process.env.FALLBACK_GAS_PRICE || 20000000000
+
 const createRequests = async () => {
   const promises = [
     genericRequest('https://ethgasstation.info/json/ethgasAPI.json', 'fastest', 100000000),
@@ -14,6 +16,9 @@ const createRequests = async () => {
     prices.push(await result)
   }
   prices = prices.filter(p => p)
+  if (prices.length == 0) {
+    prices.push(parseInt(fallbackGasPrice))
+  }
   return Math.max(...prices)
 }
 
