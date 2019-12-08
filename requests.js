@@ -2,14 +2,19 @@ const genericRequest = require('./requester').getPrice
 
 const fallbackGasPrice = process.env.FALLBACK_GAS_PRICE || 25000000000
 
-const createRequests = async () => {
-  const promises = [
-    genericRequest('https://ethgasstation.info/json/ethgasAPI.json', 'fastest', 100000000),
-    genericRequest('https://api.anyblock.tools/latest-minimum-gasprice', 'instant', 1000000000),
-    genericRequest('https://gasprice.poa.network', 'instant', 1000000000),
-    // Etherchain returns a 403 currently
-    // genericRequest('https://www.etherchain.org/api/gasPriceOracle', 'fastest', 1000000000),
-  ]
+const buildRequestDetails = (details) => {
+  const urls = details.urls.split(',')
+  const fields = details.fields.split(',')
+  const wei = details.wei.split(',')
+  const promises = []
+  for (i = 0; i < urls.length; i++) {
+    promises.push(genericRequest(urls[i], fields[i], wei[i]))
+  }
+  return promises
+}
+
+const createRequests = async (details) => {
+  const promises = buildRequestDetails(details)
   const results = await Promise.all(promises)
   let prices = []
   for (const result of results) {
