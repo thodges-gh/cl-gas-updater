@@ -1,22 +1,22 @@
 const rp = require('request-promise')
 
-const authenticate = async () => {
+const authenticate = async (chainlink) => {
   const cookie = rp.jar()
   await rp({
-    uri: process.env.CL_URL + '/sessions',
+    uri: chainlink.url + '/sessions',
     jar: cookie,
     method: 'POST',
     json: {
-      'email': process.env.CL_EMAIL,
-      'password': process.env.CL_PASSWORD
+      'email': chainlink.email,
+      'password': chainlink.password
     }
   })
   return cookie
 }
 
-const updateChainlinkGasPrice = async (cookie, newGasPrice) => {
+const updateChainlinkGasPrice = async (url, cookie, newGasPrice) => {
   return await rp({
-    uri: process.env.CL_URL + '/v2/config',
+    uri: url + '/v2/config',
     method: 'PATCH',
     jar: cookie,
     json: {
