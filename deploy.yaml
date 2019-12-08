@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gas-updater
+  labels:
+    purpose: gas-updater
+spec:
+  containers:
+  - name: gas-updater-container
+    image: thodges/cl-gas-updater
+    env:
+    - name: CL_URL 
+      value: <CL_URL>
+    - name: CL_EMAIL
+      value: <CL_EMAIL> 
+    - name: CL_PASSWORD
+      value: <CL_PASSWORD> 
+  restartPolicy: OnFailure
