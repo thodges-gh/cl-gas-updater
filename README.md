@@ -35,7 +35,7 @@ docker build . -t cl-gas-updater
 ```
 
 ## Running with Kubernetes
-If you are running your Chainlink node within Kubernetes (following the [Secure Data Links tutorial](https://medium.com/secure-data-links/running-chainlink-nodes-on-kubernetes-and-the-google-cloud-platform-1fab922b3a1a) ), a service must first be created that exposes your pods locally so we can create a new pod for the gas updater. TO do this run the command
+If you are running your Chainlink node within Kubernetes (following the [Secure Data Links tutorial](https://medium.com/secure-data-links/running-chainlink-nodes-on-kubernetes-and-the-google-cloud-platform-1fab922b3a1a)), a service must first be created that exposes your pods locally so we can create a new pod for the gas updater. TO do this run the command
 ```
 kubectl expose deployment.apps/chainlink-deployment
 ```
@@ -50,6 +50,17 @@ Once this is done, simply edit the deploy.yaml file and enter your Chainlink use
 kubectl get all
 ```
 and finding the newely deployed service (service/chainlink-deployment)
+
+Finally to run the cl-gas-updater, use the command
+```
+kubectl apply -f deploy.yaml
+```
+
+You should now see your new gas price updater pod running. To confirm the pod is running correctly, simply get the logs of the pod using
+```
+kubectl logs gas-updater
+```
+You should see the pod logging the latest pulled gas price.
 
 ## Running locally (for testing and development)
 
