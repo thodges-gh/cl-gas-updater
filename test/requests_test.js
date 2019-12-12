@@ -47,10 +47,12 @@ describe('createRequests', () => {
       wei: '1000000000,1000000000,1000000000'
     }
 
+    const expected = 21000000000
+
     it('returns the expected result', async () => {
       const gasPrice = await createRequests(details)
       assert.isNumber(gasPrice)
-      assert.equal(gasPrice, 20000000000)
+      assert.equal(gasPrice, expected)
     })
   })
 
@@ -62,10 +64,12 @@ describe('createRequests', () => {
         wei: '1000000000,1000000000'
       }
 
+      const expected = 16000000000
+
       it('returns the expected result', async () => {
         const gasPrice = await createRequests(details)
         assert.isNumber(gasPrice)
-        assert.equal(gasPrice, 15000000000)
+        assert.equal(gasPrice, expected)
       })
     })
 
@@ -76,10 +80,12 @@ describe('createRequests', () => {
         wei: '1000000000,1000000000,1000000000'
       }
 
+      const expected = 16000000000
+
       it('returns the expected result', async () => {
         const gasPrice = await createRequests(details)
         assert.isNumber(gasPrice)
-        assert.equal(gasPrice, 15000000000)
+        assert.equal(gasPrice, expected)
       })
     })
 
@@ -89,7 +95,22 @@ describe('createRequests', () => {
         fields: 'doesNotExist,doesNotExist,doesNotExist',
         wei: '1000000000,1000000000,1000000000'
       }
-      const expected = 25000000000
+      const expected = 26000000000
+
+      it('returns the expected result', async () => {
+        const gasPrice = await createRequests(details)
+        assert.isNumber(gasPrice)
+        assert.equal(gasPrice, expected)
+      })
+    })
+
+    context('gas price too high', () => {
+      const details = {
+        urls: 'http://localhost:8080/test,http://localhost:8080/test,http://localhost:8080/test',
+        fields: 'tooHigh,tooHigh,tooHigh',
+        wei: '1000000000,1000000000,1000000000'
+      }
+      const expected = 50000000000
 
       it('returns the expected result', async () => {
         const gasPrice = await createRequests(details)

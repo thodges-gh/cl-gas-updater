@@ -10,7 +10,8 @@ const startTestServer = () => {
       always15Num: 15,
       always15String: '15',
       always20Num: 20,
-      always20String: '20'
+      always20String: '20',
+      tooHigh: 99
     })
   })
 
