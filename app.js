@@ -15,7 +15,7 @@ const chainlink = {
 }
 const details = {
   urls: process.env.URLS || 'https://ethgasstation.info/json/ethgasAPI.json,https://api.anyblock.tools/latest-minimum-gasprice,https://gasprice.poa.network',
-  fields: process.env.FIELDS || 'fastest,fast,fast',
+  fields: process.env.FIELDS || 'fast,fast,fast',
   wei: process.env.WEI || '100000000,1000000000,1000000000'
 }
 
