@@ -2,6 +2,7 @@ const genericRequest = require('./requester').getPrice
 const logger = require('./logger').logger
 
 const fallbackGasPrice = process.env.FALLBACK_GAS_PRICE || 25000000000
+const addedGasPrice = process.env.ADD_GAS_PRICE || 1000000000
 
 const buildRequestDetails = (details) => {
   const urls = details.urls.split(',')
@@ -27,7 +28,7 @@ const createRequests = async (details) => {
     prices.push(parseInt(fallbackGasPrice))
   }
   logger.debug(prices)
-  return Math.max(...prices)
+  return Math.max(...prices) + parseInt(addedGasPrice)
 }
 
 exports.createRequests = createRequests
