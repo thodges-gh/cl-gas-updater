@@ -1,4 +1,5 @@
 const genericRequest = require('./requester').getPrice
+const logger = require('./logger').logger
 
 const fallbackGasPrice = process.env.FALLBACK_GAS_PRICE || 25000000000
 
@@ -20,10 +21,12 @@ const createRequests = async (details) => {
   for (const result of results) {
     prices.push(await result)
   }
+  logger.debug(prices)
   prices = prices.filter(p => p)
   if (prices.length == 0) {
     prices.push(parseInt(fallbackGasPrice))
   }
+  logger.debug(prices)
   return Math.max(...prices)
 }
 

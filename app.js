@@ -1,6 +1,7 @@
 const createRequests = require('./requests').createRequests
 const updateChainlinkGasPrice = require('./chainlink').updateChainlinkGasPrice
 const authenticate = require('./chainlink').authenticate
+const logger = require('./logger').logger
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -25,14 +26,25 @@ app.get('/health', (req, res) => {
 })
 
 cron.schedule('0 * * * * *', async () => {
-  const cookie = await authenticate(chainlink)
-  const gasPrice = await createRequests(details)
-  const result = await updateChainlinkGasPrice(chainlink.url, cookie, gasPrice)
-  console.log('Gas price updated:', gasPrice)
+  // Special case for authenticate since it will always fail on standby nodes
+  try {
+    const cookie = await authenticate(chainlink)
+    try {
+      const gasPrice = await createRequests(details)
+      const result = await updateChainlinkGasPrice(chainlink.url, cookie, gasPrice)
+      logger.info('Gas price updated: ' + gasPrice.toString())
+    } catch (error) {
+      logger.error(error)
+    }
+  } catch (error) {
+    // This keeps the log quiet for standby nodes unless set to debug
+    logger.debug(error)
+  }
 })
 
-app.listen(port, () => console.log(`Listening on port ${port}!`))
+app.listen(port, () => logger.info(`Listening on port ${port}!`))
 
 process.on('SIGINT', () => {
+  logger.info('Shutting down')
   process.exit()
 })

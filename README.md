@@ -16,7 +16,7 @@ The `URLS`, `FIELDS`, and `WEI` environment variables need to use the same index
 - `URLS`: Comma-separated list of URLs to fetch gas price info
     - Default value: `'https://ethgasstation.info/json/ethgasAPI.json,https://api.anyblock.tools/latest-minimum-gasprice,https://gasprice.poa.network'`
 - `FIELDS`: Comma-separated list of fields to parse of the response
-    - Default value: `'fastest,instant,instant'`
+    - Default value: `'fastest,fast,fast'`
 - `WEI`: Comma-separated list of values to multiply the result by to equal wei
     - Default value: `'100000000,1000000000,1000000000'`
 - `FALLBACK_GAS_PRICE`: The gas price (measured in wei) to be used if all data sources are down.
@@ -25,6 +25,8 @@ The `URLS`, `FIELDS`, and `WEI` environment variables need to use the same index
     - Default value: `'http://localhost:6688'`
 - `CL_EMAIL`: The API email address you use to log into the Chainlink node's GUI.
 - `CL_PASSWORD`: The API password you use to log into the Chainlink node's GUI.
+- `LOG_LEVEL`: The log level for the output.
+    - Default value: `'info'`
 
 ## Running with Docker
 
