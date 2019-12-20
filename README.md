@@ -11,6 +11,15 @@ Using the environment variables, you may add more data sources.
 
 ## Environment Variables
 
+### Required environment variables to change
+
+- `CL_EMAIL`: The API email address you use to log into the Chainlink node's GUI.
+- `CL_PASSWORD`: The API password you use to log into the Chainlink node's GUI.
+- `CL_URL`: The URL that your Chainlink node is listening on.
+    - Default value: `'http://localhost:6688'`
+
+### Optional environment variables to change
+
 The `URLS`, `FIELDS`, and `WEI` environment variables need to use the same index for their respective values.
 
 - `URLS`: Comma-separated list of URLs to fetch gas price info
@@ -25,12 +34,11 @@ The `URLS`, `FIELDS`, and `WEI` environment variables need to use the same index
     - Default value: `1000000000`
 - `MAX_GAS_PRICE`: The maximum gas price to send to the node if the data feeds respond with a higher value.
     - Default value: `50000000000`
-- `CL_URL`: The URL that your Chainlink node is listening on.
-    - Default value: `'http://localhost:6688'`
-- `CL_EMAIL`: The API email address you use to log into the Chainlink node's GUI.
-- `CL_PASSWORD`: The API password you use to log into the Chainlink node's GUI.
 - `LOG_LEVEL`: The log level for the output.
     - Default value: `'info'`
+- `CRON_SCHEDULE`: The Cron schedule to use for updating gas prices (6 places)
+    - Default value: `'0 * * * * *'`
+
 
 ## Running with Docker
 
