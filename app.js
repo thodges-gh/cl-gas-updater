@@ -2,22 +2,12 @@ const createRequests = require('./requests').createRequests
 const updateChainlinkGasPrice = require('./chainlink').updateChainlinkGasPrice
 const authenticate = require('./chainlink').authenticate
 const logger = require('./logger').logger
+const config = require('./config').config
 
 const express = require('express')
 const bodyParser = require('body-parser')
 const cron = require('node-cron')
 const app = express()
-const port = process.env.PORT || 8080
-const chainlink = {
-  url: process.env.CL_URL || 'http://localhost:6688',
-  email: process.env.CL_EMAIL || '',
-  password: process.env.CL_PASSWORD || ''
-}
-const details = {
-  urls: process.env.URLS || 'https://ethgasstation.info/json/ethgasAPI.json,https://api.anyblock.tools/latest-minimum-gasprice,https://gasprice.poa.network',
-  fields: process.env.FIELDS || 'fast,fast,fast',
-  wei: process.env.WEI || '100000000,1000000000,1000000000'
-}
 
 app.use(bodyParser.json())
 
@@ -25,13 +15,13 @@ app.get('/health', (req, res) => {
   res.status(200).send('ok')
 })
 
-cron.schedule('0 * * * * *', async () => {
+cron.schedule(config.schedule, async () => {
   // Special case for authenticate since it will always fail on standby nodes
   try {
-    const cookie = await authenticate(chainlink)
+    const cookie = await authenticate(config.chainlink)
     try {
-      const gasPrice = await createRequests(details)
-      const result = await updateChainlinkGasPrice(chainlink.url, cookie, gasPrice)
+      const gasPrice = await createRequests(config.details)
+      const result = await updateChainlinkGasPrice(config.chainlink.url, cookie, gasPrice)
       logger.info('Gas price updated: ' + gasPrice.toString())
     } catch (error) {
       logger.error(error)
@@ -42,7 +32,7 @@ cron.schedule('0 * * * * *', async () => {
   }
 })
 
-app.listen(port, () => logger.info(`Listening on port ${port}!`))
+app.listen(config.port, () => logger.info(`Listening on port ${config.port}!`))
 
 process.on('SIGINT', () => {
   logger.info('Shutting down')

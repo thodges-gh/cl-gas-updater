@@ -44,7 +44,11 @@ describe('createRequests', () => {
     const details = {
       urls: 'http://localhost:8080/test,http://localhost:8080/test,http://localhost:8080/test',
       fields: 'always10Num,always15Num,always20String',
-      wei: '1000000000,1000000000,1000000000'
+      wei: '1000000000,1000000000,1000000000',
+      fallbackGasPrice: 25000000000,
+      addedGasPrice: 1000000000,
+      maxGasPrice: 50000000000
+
     }
 
     const expected = 21000000000
@@ -61,7 +65,10 @@ describe('createRequests', () => {
       const details = {
         urls: 'http://localhost:8080/test,http://localhost:8080/test,http://localhost:8080/test',
         fields: 'always10Num,always15Num',
-        wei: '1000000000,1000000000'
+        wei: '1000000000,1000000000',
+        fallbackGasPrice: 25000000000,
+        addedGasPrice: 1000000000,
+        maxGasPrice: 50000000000
       }
 
       const expected = 16000000000
@@ -77,7 +84,10 @@ describe('createRequests', () => {
       const details = {
         urls: 'http://localhost:8080/test,http://localhost:8080/test,http://localhost:8080/test',
         fields: 'always10Num,always15Num,doesNotExist',
-        wei: '1000000000,1000000000,1000000000'
+        wei: '1000000000,1000000000,1000000000',
+        fallbackGasPrice: 25000000000,
+        addedGasPrice: 1000000000,
+        maxGasPrice: 50000000000
       }
 
       const expected = 16000000000
@@ -93,7 +103,10 @@ describe('createRequests', () => {
       const details = {
         urls: 'http://localhost:8080/test,http://localhost:8080/test,http://localhost:8080/test',
         fields: 'doesNotExist,doesNotExist,doesNotExist',
-        wei: '1000000000,1000000000,1000000000'
+        wei: '1000000000,1000000000,1000000000',
+        fallbackGasPrice: 25000000000,
+        addedGasPrice: 1000000000,
+        maxGasPrice: 50000000000
       }
       const expected = 26000000000
 
@@ -108,7 +121,10 @@ describe('createRequests', () => {
       const details = {
         urls: 'http://localhost:8080/test,http://localhost:8080/test,http://localhost:8080/test',
         fields: 'tooHigh,tooHigh,tooHigh',
-        wei: '1000000000,1000000000,1000000000'
+        wei: '1000000000,1000000000,1000000000',
+        fallbackGasPrice: 25000000000,
+        addedGasPrice: 1000000000,
+        maxGasPrice: 50000000000
       }
       const expected = 50000000000
 
