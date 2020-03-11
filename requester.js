@@ -12,7 +12,7 @@ const getPrice = async (url, speed, multiplyBy) => {
     logger.debug(response)
     return convertToWei(response[speed], multiplyBy)
   } catch (error) {
-    throw error
+    logger.error(error)
   }
 }
 

@@ -15,6 +15,10 @@ const startTestServer = () => {
     })
   })
 
+  app.get('/error', (req, res) => {
+    res.status(500).send()
+  })
+
   app.listen(port)
 }
 

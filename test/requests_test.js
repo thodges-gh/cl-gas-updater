@@ -136,6 +136,26 @@ describe('createRequests', () => {
     })
   })
 
+  context('when an endpoint returns an error', () => {
+    const details = {
+      urls: 'http://localhost:8080/test,http://localhost:8080/error,http://localhost:8080/test',
+      fields: 'always10Num,always15Num,always20String',
+      wei: '1000000000,1000000000,1000000000',
+      fallbackGasPrice: 25000000000,
+      addedGasPrice: 1000000000,
+      maxGasPrice: 50000000000
+
+    }
+
+    const expected = 21000000000
+
+    it('returns the expected result', async () => {
+      const gasPrice = await createRequests(details)
+      assert.isNumber(gasPrice)
+      assert.equal(gasPrice, expected)
+    })
+  })
+
   after(() => {
     testServer.stopTestServer()
   })
