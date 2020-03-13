@@ -25,7 +25,8 @@ const createRequests = async (details) => {
     prices.push(parseInt(details.fallbackGasPrice))
   }
   logger.debug(prices)
-  return Math.max(...prices) + parseInt(details.addedGasPrice)
+  const gasPrice = Math.max(...prices) + parseInt(details.addedGasPrice)
+  return Math.min(gasPrice, details.maxGasPrice)
 }
 
 exports.createRequests = createRequests

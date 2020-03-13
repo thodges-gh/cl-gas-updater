@@ -11,6 +11,7 @@ const config = {
     wei: process.env.WEI || '100000000,1000000000,1000000000,1000000000',
     fallbackGasPrice: process.env.FALLBACK_GAS_PRICE || 25000000000,
     addedGasPrice: process.env.ADD_GAS_PRICE || 1000000000,
+    maxGasPrice: process.env.MAX_GAS_PRICE || 1000000000000
   },
   schedule: process.env.CRON_SCHEDULE || '0 * * * * *'
 }
