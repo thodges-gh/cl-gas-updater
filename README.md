@@ -6,6 +6,7 @@ Currently tested endpoints are:
 - [ETH Gas Station](https://ethgasstation.info/json/ethgasAPI.json)
 - [Anyblock Analytics](https://api.anyblock.tools/latest-minimum-gasprice)
 - [POA Network](https://gasprice.poa.network)
+- [Etherchain](https://etherchain.org/tools/gasPriceOracle)
 
 Using the environment variables, you may add more data sources.
 
@@ -32,8 +33,6 @@ The `URLS`, `FIELDS`, and `WEI` environment variables need to use the same index
     - Default value: `25000000000`
 - `ADD_GAS_PRICE`: The amount of gas (in wei) to add to the max of the gas price results.
     - Default value: `1000000000`
-- `MAX_GAS_PRICE`: The maximum gas price to send to the node if the data feeds respond with a higher value.
-    - Default value: `50000000000`
 - `LOG_LEVEL`: The log level for the output.
     - Default value: `'info'`
 - `CRON_SCHEDULE`: The Cron schedule to use for updating gas prices (6 places)
