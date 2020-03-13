@@ -6,9 +6,9 @@ const config = {
     password: process.env.CL_PASSWORD || ''
   },
   details: {
-    urls: process.env.URLS || 'https://ethgasstation.info/json/ethgasAPI.json,https://api.anyblock.tools/latest-minimum-gasprice,https://gasprice.poa.network',
-    fields: process.env.FIELDS || 'fast,fast,fast',
-    wei: process.env.WEI || '100000000,1000000000,1000000000',
+    urls: process.env.URLS || 'https://ethgasstation.info/json/ethgasAPI.json,https://api.anyblock.tools/latest-minimum-gasprice,https://gasprice.poa.network,https://www.etherchain.org/api/gasPriceOracle',
+    fields: process.env.FIELDS || 'fast,fast,fast,fast',
+    wei: process.env.WEI || '100000000,1000000000,1000000000,1000000000',
     fallbackGasPrice: process.env.FALLBACK_GAS_PRICE || 25000000000,
     addedGasPrice: process.env.ADD_GAS_PRICE || 1000000000,
   },

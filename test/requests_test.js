@@ -28,8 +28,8 @@ describe('poanetwork', () => {
 })
 
 describe('etherchain', () => {
-  it.skip('returns a number', async () => {
-    const gasPrice = await genericRequest('https://www.etherchain.org/api/gasPriceOracle', 'fastest', 1000000000)
+  it('returns a number', async () => {
+    const gasPrice = await genericRequest('https://www.etherchain.org/api/gasPriceOracle', 'fast', 1000000000)
     assert.isNumber(gasPrice)
     assert.isAbove(gasPrice, 0)
   })
