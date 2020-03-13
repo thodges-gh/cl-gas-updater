@@ -47,7 +47,6 @@ describe('createRequests', () => {
       wei: '1000000000,1000000000,1000000000',
       fallbackGasPrice: 25000000000,
       addedGasPrice: 1000000000,
-      maxGasPrice: 50000000000
 
     }
 
@@ -68,7 +67,6 @@ describe('createRequests', () => {
         wei: '1000000000,1000000000',
         fallbackGasPrice: 25000000000,
         addedGasPrice: 1000000000,
-        maxGasPrice: 50000000000
       }
 
       const expected = 16000000000
@@ -87,7 +85,6 @@ describe('createRequests', () => {
         wei: '1000000000,1000000000,1000000000',
         fallbackGasPrice: 25000000000,
         addedGasPrice: 1000000000,
-        maxGasPrice: 50000000000
       }
 
       const expected = 16000000000
@@ -106,27 +103,8 @@ describe('createRequests', () => {
         wei: '1000000000,1000000000,1000000000',
         fallbackGasPrice: 25000000000,
         addedGasPrice: 1000000000,
-        maxGasPrice: 50000000000
       }
       const expected = 26000000000
-
-      it('returns the expected result', async () => {
-        const gasPrice = await createRequests(details)
-        assert.isNumber(gasPrice)
-        assert.equal(gasPrice, expected)
-      })
-    })
-
-    context('gas price too high', () => {
-      const details = {
-        urls: 'http://localhost:8080/test,http://localhost:8080/test,http://localhost:8080/test',
-        fields: 'tooHigh,tooHigh,tooHigh',
-        wei: '1000000000,1000000000,1000000000',
-        fallbackGasPrice: 25000000000,
-        addedGasPrice: 1000000000,
-        maxGasPrice: 50000000000
-      }
-      const expected = 50000000000
 
       it('returns the expected result', async () => {
         const gasPrice = await createRequests(details)
@@ -143,7 +121,6 @@ describe('createRequests', () => {
       wei: '1000000000,1000000000,1000000000',
       fallbackGasPrice: 25000000000,
       addedGasPrice: 1000000000,
-      maxGasPrice: 50000000000
 
     }
 
