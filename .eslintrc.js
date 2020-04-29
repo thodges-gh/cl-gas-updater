@@ -16,6 +16,7 @@ module.exports = {
     ecmaVersion: 2018
   },
   rules: {
-    'standard/no-callback-literal': 0
+    'standard/no-callback-literal': 0,
+    'no-throw-literal': 0
   }
 }

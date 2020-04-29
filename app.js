@@ -21,7 +21,7 @@ cron.schedule(config.schedule, async () => {
     const cookie = await authenticate(config.chainlink)
     try {
       const gasPrice = await createRequests(config.details)
-      const result = await updateChainlinkGasPrice(config.chainlink.url, cookie, gasPrice)
+      await updateChainlinkGasPrice(config.chainlink.url, cookie, gasPrice)
       logger.info('Gas price updated: ' + gasPrice.toString())
     } catch (error) {
       logger.error(error)

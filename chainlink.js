@@ -9,8 +9,8 @@ const authenticate = async (chainlink) => {
       jar: cookie,
       method: 'POST',
       json: {
-        'email': chainlink.email,
-        'password': chainlink.password
+        email: chainlink.email,
+        password: chainlink.password
       }
     })
     logger.debug('Authenticated with Chainlink')
@@ -27,7 +27,7 @@ const updateChainlinkGasPrice = async (url, cookie, newGasPrice) => {
       method: 'PATCH',
       jar: cookie,
       json: {
-        'ethGasPriceDefault': newGasPrice
+        ethGasPriceDefault: newGasPrice
       }
     })
   } catch (error) {
