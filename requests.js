@@ -6,7 +6,7 @@ const buildRequestDetails = (details) => {
   const fields = details.fields.split(',')
   const wei = details.wei.split(',')
   const promises = []
-  for (i = 0; i < urls.length; i++) {
+  for (let i = 0; i < urls.length; i++) {
     promises.push(genericRequest(urls[i], fields[i], wei[i]))
   }
   return promises
@@ -21,7 +21,7 @@ const createRequests = async (details) => {
   }
   logger.debug(prices)
   prices = prices.filter(p => p)
-  if (prices.length == 0) {
+  if (prices.length === 0) {
     prices.push(parseInt(details.fallbackGasPrice))
   }
   logger.debug(prices)
