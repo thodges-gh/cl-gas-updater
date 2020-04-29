@@ -3,5 +3,6 @@ npm-debug.log
 Dockerfile
 .dockerignore
 .git
+.github
 .gitignore
 .envrc
