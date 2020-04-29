@@ -104,11 +104,17 @@ You should see the pod logging the latest pulled gas price.
 Install dependencies
 
 ```
-npm install
+yarn
 ```
 
 Run the application
 
 ```
 node app.js
+```
+
+Test
+
+```
+yarn test
 ```
