@@ -2,38 +2,30 @@ const assert = require('chai').assert
 const extrapolate = require('../extrapolator').extrapolate
 
 describe('extrapolate', () => {
-  context('when history is empty', () => {
-    const gasPriceHistory = []
-    it('throws', () => {
-      try {
-        extrapolate(gasPriceHistory)
-      } catch (error) {
-        assert.equal(error.message, 'Attempted to extrapolate with no data points')
-      }
-    })
-  })
+  const details = {
+    extrapolationHistory: 3
+  }
 
-  context('when history has only one data point', async () => {
-    const gasPriceHistory = [10 * 10 ** 9]
-    it('returns that one data point', async () => {
-      const extrapolatedGasPrice = extrapolate(gasPriceHistory)
-      assert.equal(extrapolatedGasPrice, gasPriceHistory[0])
-    })
-  })
+  it('extrapolates correctly', () => {
+    // Returns the current gas price if the history is empty
+    // History: []
+    let extrapolatedGasPrice = extrapolate(details, 10 * 10 ** 9)
+    assert.equal(extrapolatedGasPrice, 10 * 10 ** 9)
 
-  context('when there are increasing data points', () => {
-    const gasPriceHistory = [10 * 10 ** 9, 12 * 10 ** 9, 14 * 10 ** 9]
-    it('extrapolates correctly', () => {
-      const extrapolatedGasPrice = extrapolate(gasPriceHistory)
-      assert.equal(extrapolatedGasPrice, 16 * 10 ** 9)
-    })
-  })
+    // Still extrapolates if we have less than extrapolationHistory readings
+    // History: [10 gwei]
+    extrapolatedGasPrice = extrapolate(details, 12 * 10 ** 9)
+    assert.equal(extrapolatedGasPrice, 14 * 10 ** 9)
 
-  context('when there are decreasing data points', () => {
-    const gasPriceHistory = [14 * 10 ** 9, 12 * 10 ** 9, 10 * 10 ** 9]
-    it('extrapolates correctly', () => {
-      const extrapolatedGasPrice = extrapolate(gasPriceHistory)
-      assert.equal(extrapolatedGasPrice, 8 * 10 ** 9)
-    })
+    // Extrapolates correctly with extrapolationHistory-many readings
+    // History: [10 gwei, 12 gwei]
+    extrapolatedGasPrice = extrapolate(details, 14 * 10 ** 9)
+    assert.equal(extrapolatedGasPrice, 16 * 10 ** 9)
+
+    // Extrapolates correctly with decreasing values
+    extrapolate(details, 12 * 10 ** 9)
+    // History: [... 14 gwei, 12 gwei]
+    extrapolatedGasPrice = extrapolate(details, 10 * 10 ** 9)
+    assert.equal(extrapolatedGasPrice, 8 * 10 ** 9)
   })
 })
