@@ -26,7 +26,7 @@ cron.schedule(config.schedule, async () => {
       const currentGasPrice = await createRequests(config.details)
       gasPriceHistory.push(currentGasPrice)
       gasPriceHistory = gasPriceHistory.slice(
-        Math.max(gasPriceHistory.length - config.details.extrapolationDatasetSize, 0)
+        Math.max(gasPriceHistory.length - config.details.extrapolationHistory, 0)
         )
       const extrapolatedGasPrice = extrapolate(gasPriceHistory)
       const gasPrice = Math.max(currentGasPrice, extrapolatedGasPrice)

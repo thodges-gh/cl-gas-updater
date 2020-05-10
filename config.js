@@ -12,7 +12,7 @@ const config = {
     fallbackGasPrice: process.env.FALLBACK_GAS_PRICE || 25000000000,
     addedGasPrice: process.env.ADD_GAS_PRICE || 1000000000,
     maxGasPrice: process.env.MAX_GAS_PRICE || 1000000000000,
-    extrapolationDatasetSize: process.env.EXTRAPOLATION_DATASET_SIZE || 3
+    extrapolationHistory: process.env.EXTRAPOLATION_HISTORY || 3
   },
   schedule: process.env.CRON_SCHEDULE || '0 * * * * *'
 }
