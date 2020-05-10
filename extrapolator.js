@@ -1,4 +1,14 @@
-const extrapolate = (ys) => {
+let gasPriceHistory = []
+
+const extrapolate = (details, currentGasPrice) => {
+  gasPriceHistory.push(currentGasPrice)
+  gasPriceHistory = gasPriceHistory.slice(
+    Math.max(gasPriceHistory.length - details.extrapolationHistory, 0)
+  )
+  return calculate(gasPriceHistory)
+}
+
+const calculate = (ys) => {
   if (ys.length === 0) {
     throw new Error('Attempted to extrapolate with no data points')
   } else if (ys.length === 1) {

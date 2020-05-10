@@ -10,8 +10,6 @@ const bodyParser = require('body-parser')
 const cron = require('node-cron')
 const app = express()
 
-let gasPriceHistory = []
-
 app.use(bodyParser.json())
 
 app.get('/health', (req, res) => {
@@ -24,11 +22,9 @@ cron.schedule(config.schedule, async () => {
     const cookie = await authenticate(config.chainlink)
     try {
       const currentGasPrice = await createRequests(config.details)
-      gasPriceHistory.push(currentGasPrice)
-      gasPriceHistory = gasPriceHistory.slice(
-        Math.max(gasPriceHistory.length - config.details.extrapolationHistory, 0)
-      )
-      const extrapolatedGasPrice = extrapolate(gasPriceHistory)
+      logger.debug('Current gas price: ' + currentGasPrice.toString())
+      const extrapolatedGasPrice = extrapolate(config.details, currentGasPrice)
+      logger.debug('Extrapolated gas price: ' + extrapolatedGasPrice.toString())
       const gasPrice = Math.max(currentGasPrice, extrapolatedGasPrice)
       await updateChainlinkGasPrice(config.chainlink.url, cookie, gasPrice)
       logger.info('Gas price updated: ' + gasPrice.toString())
