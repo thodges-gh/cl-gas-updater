@@ -1,6 +1,7 @@
 const createRequests = require('./requests').createRequests
 const updateChainlinkGasPrice = require('./chainlink').updateChainlinkGasPrice
 const authenticate = require('./chainlink').authenticate
+const extrapolate = require('./extrapolator').extrapolate
 const logger = require('./logger').logger
 const config = require('./config').config
 
@@ -20,7 +21,11 @@ cron.schedule(config.schedule, async () => {
   try {
     const cookie = await authenticate(config.chainlink)
     try {
-      const gasPrice = await createRequests(config.details)
+      const currentGasPrice = await createRequests(config.details)
+      logger.debug('Current gas price: ' + currentGasPrice.toString())
+      const extrapolatedGasPrice = extrapolate(config.details, currentGasPrice)
+      logger.debug('Extrapolated gas price: ' + extrapolatedGasPrice.toString())
+      const gasPrice = Math.max(currentGasPrice, extrapolatedGasPrice)
       await updateChainlinkGasPrice(config.chainlink.url, cookie, gasPrice)
       logger.info('Gas price updated: ' + gasPrice.toString())
     } catch (error) {
