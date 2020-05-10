@@ -35,6 +35,9 @@ The `URLS`, `FIELDS`, and `WEI` environment variables need to use the same index
     - Default value: `1000000000`
 - `MAX_GAS_PRICE`: The maximum gas price to send to the node if the data feeds respond with a higher value.
     - Default value: `1000000000000`
+- `EXTRAPOLATION_HISTORY`: The number of most recent readings used to predict and lead upward spikes in gas price. Lower is more responsive.
+    - Default value: `3`
+    - Minimum value: `2`
 - `LOG_LEVEL`: The log level for the output.
     - Default value: `'info'`
 - `CRON_SCHEDULE`: The Cron schedule to use for updating gas prices (6 places)
