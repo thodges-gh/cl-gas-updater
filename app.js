@@ -27,7 +27,7 @@ cron.schedule(config.schedule, async () => {
       gasPriceHistory.push(currentGasPrice)
       gasPriceHistory = gasPriceHistory.slice(
         Math.max(gasPriceHistory.length - config.details.extrapolationHistory, 0)
-        )
+      )
       const extrapolatedGasPrice = extrapolate(gasPriceHistory)
       const gasPrice = Math.max(currentGasPrice, extrapolatedGasPrice)
       await updateChainlinkGasPrice(config.chainlink.url, cookie, gasPrice)

@@ -1,6 +1,6 @@
 const extrapolate = (ys) => {
   if (ys.length === 0) {
-    throw new Error('Attempted to extrapolate with no data points');
+    throw new Error('Attempted to extrapolate with no data points')
   } else if (ys.length === 1) {
     return ys[0]
   }
@@ -16,7 +16,7 @@ const extrapolate = (ys) => {
   const Sxy = ys.reduce((a, b, i) => a + b * xs[i], 0)
   const slope = (n * Sxy - Sx * Sy) / (n * Sxx - Sx * Sx)
 
-  return ys[n - 1] + slope;
+  return ys[n - 1] + slope
 }
 
 exports.extrapolate = extrapolate
